@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Testes do Sistema AppRH")
 @TestInstance(Lifecycle.PER_CLASS)
-public class ########## extends AppRhApplicationTests {
+public class TesteAppRh extends AppRhApplicationTests {
 	
 	@Autowired
 	private VagaController vc;
@@ -37,8 +37,8 @@ public class ########## extends AppRhApplicationTests {
 	@Test
 	public void contextLoads() throws Exception {
 		assertThat(vc).isNotNull();
-		assertThat(fc).###########;
-		##############.isNotNull();
+		assertThat(fc).isNotNull();
+		assertThat(ec).isNotNull();
 	}
 
 
@@ -69,39 +69,39 @@ public class ########## extends AppRhApplicationTests {
 		System.out.println("Executando teste de Rotas: ");
 
 		// rota para a raíz do sistema
-		mockMvc.perform(get("/")).###Expect(status().isOk());
+		mockMvc.perform(get("/")).andExpect(status().isOk());
 
 		// rota que cadastra vaga
-		mockMvc.perform(###("/cadastrarVaga")).andExpect(status().isOk());
+		mockMvc.perform(get("/cadastrarVaga")).andExpect(status().isOk());
 
 		// rota que lista vagas
-		mockMvc.#######(get("/vagas")).andExpect(status().######);
+		mockMvc.perform(get("/vagas")).andExpect(status().isOk());
 
 		// rota detalhes vaga
-		#######.perform(get("/####/1")).########(status().isOk());
-
+		mockMvc.perform(get("/vaga/1")).andExpect(status().isOk());
+		
 		// rota que lista funcionários
-		mockMvc.perform(get("/############")).andExpect(status().######);
+		mockMvc.perform(get("/funcionarios")).andExpect(status().isOk());
 
 		// rota detalhes funcionario
-		###################("/detalhes-funcionario/1")).andExpect(status().isOk());
+		mockMvc.perform(get("/detalhes-funcionario/1")).andExpect(status().isOk());
 
 		// rota que lista empresas
-		mockMvc.perform(get("/empresas")).##########################;
+		mockMvc.perform(get("/empresas")).andExpect(status().isOk());
 
 		// rota que cadastra vaga
-		####Mvc.perform(get("#################")).andExpect(status().isO####;
+		mockMvc.perform(get("/cadastrarVaga")).andExpect(status().isOk());
 
 	}
 
 	@DisplayName("Testa validaSalario(Salário maior que 30000.00)")
-	@####
+	@Test
 	public void testaSalarioMaiorQue30000() {
 		Vaga vaga = new Vaga();
 		// Aceita somente o valor zero no primeiro argumento 
 		// e valor acima de 30000.00 no segundo.
 		// O valor zero é o esperado da função validaSalario() nesses casos.
-		assertEquals(new BigDecimal("0"), vaga.validaSalario(new BigDecimal("#######.##")));
+		assertEquals(new BigDecimal("0"), vaga.validaSalario(new BigDecimal("30000.01")));
 	}
 
 	@DisplayName("Testa validaSalario(Salário menor ou igual a 30000.00)")
@@ -110,7 +110,7 @@ public class ########## extends AppRhApplicationTests {
 		Vaga vaga = new Vaga();
 		// Só aceita valores iguais nos dois argumentos, 
 		// mas precisa ser igual ou menor que 30000.00.
-		############(new BigDecimal("30000.00"), ####.validaSalario(new BigDecimal("#####.##")));
+		assertEquals(new BigDecimal("30000.00"), vaga.validaSalario(new BigDecimal("30000.00")));
 	}
 	
 	
